@@ -117,7 +117,7 @@ const ElectricalServiceWebsite = () => {
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <header className="bg-blue-600 text-white p-4 sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="w-full max-w-full mx-auto flex justify-between items-center">
           <motion.h1
             className="text-2xl font-bold"
             initial={{ opacity: 0 }}
@@ -127,7 +127,7 @@ const ElectricalServiceWebsite = () => {
             PowerPro Electricians
           </motion.h1>
           <nav>
-            <ul className="flex space-x-4">
+            <ul className="flex space-x-4 text-sm md:text-base">
               <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
               <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
               <li>
@@ -143,51 +143,52 @@ const ElectricalServiceWebsite = () => {
         </div>
       </header>
 
-     {/* Hero Section */}
-<motion.section
-  className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1 }}
->
-  <div className="container mx-auto text-center">
-    <motion.h2
-      className="text-5xl font-bold mb-4"
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      Powering Your World, One Socket at a Time
-    </motion.h2>
-    <p className="text-xl mb-8">
-      Experience the brilliance of expert electrical services for your home and business
-    </p>
-    <motion.div
-      className="flex justify-center space-x-4"
-      initial={{ scale: 0.9 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <Button
-        size="lg"
-        onClick={() => {
-          const servicesSection = document.getElementById('services');
-          servicesSection?.scrollIntoView({ behavior: 'smooth' });
-        }}
+      {/* Hero Section */}
+      <motion.section
+        className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-10 md:py-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        Book Electrician Now
-      </Button>
-      <Button
-        size="lg"
-        variant="outline"
-        className="bg-white text-blue-600 hover:bg-blue-100"
-        onClick={handleVideoSupport}
-      >
-        <Video className="mr-2" /> Get Instant Video Support
-      </Button>
-    </motion.div>
-  </div>
-</motion.section>
+        <div className="w-full max-w-full mx-auto text-center px-4 md:px-0">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-4"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Powering Your World, One Socket at a Time
+          </motion.h2>
+          <p className="text-base md:text-xl mb-8">
+            Experience the brilliance of expert electrical services for your home and business
+          </p>
+          <motion.div
+            className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Button
+              size="lg"
+              className="w-full md:w-auto"
+              onClick={() => {
+                const servicesSection = document.getElementById('services');
+                servicesSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Book Electrician Now
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full md:w-auto bg-white text-blue-600 hover:bg-blue-100"
+              onClick={handleVideoSupport}
+            >
+              <Video className="mr-2" /> Get Instant Video Support
+            </Button>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* Services Section */}
       <section id="services" className="py-16">
