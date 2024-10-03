@@ -1,6 +1,6 @@
 'use client'; 
 import React, { useState } from 'react';
-import { Phone, Zap, Shield, Star, Home, Building2, Video, Search,Menu } from 'lucide-react';
+import { Phone, Zap, X,Shield, Star, Home, Building2, Video, Search,Menu,AlertTriangle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
  
-import { motion } from "framer-motion"; // for animations
+import { motion, AnimatePresence } from "framer-motion"; // for animations
 
  
 const testimonials = [
@@ -114,41 +114,101 @@ const ElectricalServiceWebsite = () => {
     </motion.section>
   );
 
-  return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
+  interface HeaderProps {
+    setShowEmergencyAlert: (value: boolean) => void;
+  }
+  
+  const Header: React.FC<HeaderProps> = ({ setShowEmergencyAlert }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    const menuItems = [
+      { href: "#services", label: "Services" },
+      { href: "#how-we-work", label: "How We Work" },
+      { href: "#testimonials", label: "Testimonials" },
+      { href: "#faq", label: "FAQ" },
+    ];
+  
+    return (
+      
       <header className="bg-blue-600 text-white p-4 sticky top-0 z-50">
-  <div className="container mx-auto flex justify-between items-center">
-    <motion.h1
-      className="text-2xl font-bold"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      PowerPro Electricians
-    </motion.h1>
-    {/* Mobile Menu Button */}
-    <div className="md:hidden">
-      <Menu className="w-6 h-6" />
-    </div>
-    {/* Navigation for larger screens */}
-    <nav className="hidden md:block">
-      <ul className="flex flex-col md:flex-row md:space-x-4">
-        <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
-        <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
-        <li>
-          <motion.div
-            animate={showEmergencyAlert ? { scale: [1, 1.1, 1], opacity: [1, 0.8, 1] } : {}}
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            <Button variant="secondary" onClick={() => setShowEmergencyAlert(true)}>Emergency Service</Button>
-          </motion.div>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center">
+            <motion.h1
+              className="text-2xl font-bold"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              PowerPro Electricians
+            </motion.h1>
+  
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-6">
+              {menuItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="hover:text-yellow-300 transition-colors duration-200"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+  
+            <div className="flex items-center space-x-2">
+              {/* Emergency Button - Always Visible */}
+              <Button
+                variant="destructive"
+                className="bg-red-500 hover:bg-red-600 text-white flex items-center"
+                onClick={() => setShowEmergencyAlert(true)}
+              >
+                <AlertTriangle className="w-4 h-4 mr-2" />
+                Emergency
+              </Button>
+  
+              {/* Mobile Menu Button */}
+              <button className="md:hidden" onClick={toggleMenu}>
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+  
+          {/* Mobile Navigation */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.nav
+                className="md:hidden mt-4"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ul className="flex flex-col space-y-4">
+                  {menuItems.map((item) => (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        className="block py-2 hover:text-yellow-300 transition-colors duration-200"
+                        onClick={toggleMenu}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </div>
+      </header>
+      
+    );
+  };
+  
+ return( 
+  <div>
+     <Header setShowEmergencyAlert={setShowEmergencyAlert} />
 
 
 
@@ -287,66 +347,66 @@ const ElectricalServiceWebsite = () => {
       {/* Video Support Section */}
       <VideoSupportSection />
 
-      {/* Emergency Alert */}
-      <Dialog open={showEmergencyAlert} onOpenChange={setShowEmergencyAlert}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Emergency Electrical Service</DialogTitle>
-            <DialogDescription>
-              Call our emergency hotline for urgent issues.
-            </DialogDescription>
-          </DialogHeader>
-          <motion.div
-            className="p-4"
-            animate={{ scale: [1, 1.05, 1], opacity: [1, 0.8, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            <Alert variant="destructive">
-              <Phone className="w-6 h-6" />
-              <AlertTitle>Emergency Hotline</AlertTitle>
-              <AlertDescription>
-                <a href="tel:+18001234567" className="underline">+1 (800) 123-4567</a>
-              </AlertDescription>
-            </Alert>
-          </motion.div>
-          <DialogFooter>
-            <Button onClick={() => setShowEmergencyAlert(false)}>Close</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Emergency Alert and Video Call Dialogs */}
+<>
+  {/* Emergency Alert */}
+  <Dialog open={showEmergencyAlert} onOpenChange={setShowEmergencyAlert}>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Emergency Electrical Service</DialogTitle>
+        <DialogDescription>
+          Call our emergency hotline for urgent issues.
+        </DialogDescription>
+      </DialogHeader>
+      <motion.div
+        className="p-4"
+        animate={{ scale: [1, 1.05, 1], opacity: [1, 0.8, 1] }}
+        transition={{ duration: 1, repeat: Infinity }}
+      >
+        <Alert variant="destructive">
+          <Phone className="w-6 h-6" />
+          <AlertTitle>Emergency Hotline</AlertTitle>
+          <AlertDescription>
+            <a href="tel:+18001234567" className="underline">+1 (800) 123-4567</a>
+          </AlertDescription>
+        </Alert>
+      </motion.div>
+      <DialogFooter>
+        <Button onClick={() => setShowEmergencyAlert(false)}>Close</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 
-                  
-
- 
-<Dialog open={showVideoCall} onOpenChange={setShowVideoCall}>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Instant Video Support</DialogTitle>
-    </DialogHeader>
-    
-    <div className="space-y-4">
-      {/* Input fields for user's name and problem description */}
-      <Label>Your Name</Label>
-      <Input 
-        value={userNameForCall} 
-        onChange={(e) => setUserNameForCall(e.target.value)} 
-        placeholder="Enter your name" 
-      />
+  {/* Video Call Dialog */}
+  <Dialog open={showVideoCall} onOpenChange={setShowVideoCall}>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Instant Video Support</DialogTitle>
+      </DialogHeader>
       
-      <Label>Describe the Problem</Label>
-      <Textarea 
-        value={problemDescriptionForCall} 
-        onChange={(e) => setProblemDescriptionForCall(e.target.value)} 
-        placeholder="Describe your issue" 
-      />
-    </div>
-    
-    <DialogFooter>
-      <Button variant="secondary" onClick={() => setShowVideoCall(false)}>Close</Button>
-      <Button onClick={handleStartVideoCall}>Start Video Call</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+      <div className="space-y-4">
+        <Label>Your Name</Label>
+        <Input 
+          value={userNameForCall} 
+          onChange={(e) => setUserNameForCall(e.target.value)} 
+          placeholder="Enter your name" 
+        />
+        
+        <Label>Describe the Problem</Label>
+        <Textarea 
+          value={problemDescriptionForCall} 
+          onChange={(e) => setProblemDescriptionForCall(e.target.value)} 
+          placeholder="Describe your issue" 
+        />
+      </div>
+      
+      <DialogFooter>
+        <Button variant="secondary" onClick={() => setShowVideoCall(false)}>Close</Button>
+        <Button onClick={handleStartVideoCall}>Start Video Call</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</>
  {/* How We Work Section */}
  <section id="how-we-work" className="py-16 bg-white">
         <div className="container mx-auto text-center">
