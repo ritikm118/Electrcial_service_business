@@ -117,31 +117,36 @@ const ElectricalServiceWebsite = () => {
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <header className="bg-blue-600 text-white p-4 sticky top-0 z-50">
-        <div className="w-full max-w-full mx-auto flex justify-between items-center">
-          <motion.h1
-            className="text-2xl font-bold"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+  <div className="container mx-auto flex justify-between items-center flex-wrap md:flex-nowrap">
+    <motion.h1
+      className="text-xl md:text-2xl font-bold"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      PowerPtiy Electricians
+    </motion.h1>
+
+    {/* Responsive Nav */}
+    <nav>
+      <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 mt-2 md:mt-0">
+        <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
+        <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
+        <li>
+          <motion.div
+            animate={showEmergencyAlert ? { scale: [1, 1.1, 1], opacity: [1, 0.8, 1] } : {}}
+            transition={{ duration: 1, repeat: Infinity }}
           >
-            PowerPro Electricians
-          </motion.h1>
-          <nav>
-            <ul className="flex space-x-4 text-sm md:text-base">
-              <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
-              <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
-              <li>
-                <motion.div
-                  animate={showEmergencyAlert ? { scale: [1, 1.1, 1], opacity: [1, 0.8, 1] } : {}}
-                  transition={{ duration: 1, repeat: Infinity }}
-                >
-                  <Button variant="secondary" onClick={() => setShowEmergencyAlert(true)}>Emergency Service</Button>
-                </motion.div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+            <Button variant="secondary" onClick={() => setShowEmergencyAlert(true)}>
+              Emergency Service
+            </Button>
+          </motion.div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 
       {/* Hero Section */}
       <motion.section
