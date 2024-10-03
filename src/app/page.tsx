@@ -124,7 +124,7 @@ const ElectricalServiceWebsite = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      PowerPtiy Electricians
+      P 
     </motion.h1>
 
     {/* Responsive Nav */}
