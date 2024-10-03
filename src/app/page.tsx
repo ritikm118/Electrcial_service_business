@@ -192,7 +192,7 @@ const ElectricalServiceWebsite = () => {
       {/* Services Section */}
       <section id="services" className="py-16">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Our Premium Services</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Our P ervices</h2>
           
           {/* Search Input */}
           <div className="flex justify-center mb-8">
