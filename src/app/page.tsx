@@ -1,6 +1,6 @@
 'use client'; 
 import React, { useState } from 'react';
-import { Phone, Zap, Shield, Star, Home, Building2, Video, Search } from 'lucide-react';
+import { Phone, Zap, Shield, Star, Home, Building2, Video, Search,Menu } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -85,6 +85,12 @@ const ElectricalServiceWebsite = () => {
       alert("Please fill in your name and the problem description before starting the video call.");
     }
   };
+  const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
   const VideoSupportSection = () => (
     <motion.section
       className="py-16 bg-blue-50"
@@ -114,25 +120,32 @@ const ElectricalServiceWebsite = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-blue-600 text-white p-4 sticky top-0 z-50">
-  <div className="container mx-auto flex justify-between items-center flex-wrap md:flex-nowrap">
-    <motion.h1
-      className="text-xl md:text-2xl font-bold"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      P 
-    </motion.h1>
+    <header className="bg-blue-600 text-white p-4 sticky top-0 z-50">
+      <div className="container mx-auto flex justify-between items-center">
+        <motion.h1
+          className="text-xl md:text-2xl font-bold"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          PowerPro Electricians
+        </motion.h1>
 
-    {/* Responsive Nav */}
-    <nav>
-      <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 mt-2 md:mt-0">
-        <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
-        <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
-        <li>
+        {/* Hamburger Menu Icon */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            <Menu className="text-white w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-4">
+          <a href="#services" className="hover:text-yellow-300">
+            Services
+          </a>
+          <a href="#contact" className="hover:text-yellow-300">
+            Contact
+          </a>
           <motion.div
             animate={showEmergencyAlert ? { scale: [1, 1.1, 1], opacity: [1, 0.8, 1] } : {}}
             transition={{ duration: 1, repeat: Infinity }}
@@ -141,11 +154,40 @@ const ElectricalServiceWebsite = () => {
               Emergency Service
             </Button>
           </motion.div>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+        </nav>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-14 left-0 right-0 bg-blue-600 p-4">
+            <ul className="flex flex-col space-y-2">
+              <li>
+                <a href="#services" className="block text-white hover:text-yellow-300">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="block text-white hover:text-yellow-300">
+                  Contact
+                </a>
+              </li>
+              <li>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setShowEmergencyAlert(true);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Emergency Service
+                </Button>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
 
 
       {/* Hero Section */}
