@@ -127,9 +127,13 @@ const ElectricalServiceWebsite = () => {
     >
       PowerPro Electricians
     </motion.h1>
-    <nav>
-      {/* Adding responsive classes */}
-      <ul className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
+    {/* Mobile Menu Button */}
+    <div className="md:hidden">
+      <Menu className="w-6 h-6" />
+    </div>
+    {/* Navigation for larger screens */}
+    <nav className="hidden md:block">
+      <ul className="flex flex-col md:flex-row md:space-x-4">
         <li><a href="#services" className="hover:text-yellow-300">Services</a></li>
         <li><a href="#contact" className="hover:text-yellow-300">Contact</a></li>
         <li>
@@ -144,6 +148,7 @@ const ElectricalServiceWebsite = () => {
     </nav>
   </div>
 </header>
+
 
 
 
