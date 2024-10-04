@@ -15,17 +15,14 @@ import { motion, AnimatePresence } from "framer-motion"; // for animations
  
 const testimonials = [
   
-  { 
-    name: 'John Doe', 
-    feedback: '   Amazing service! The electrician arrived on time and fixed my issue quickly.  ' 
-  },
+   
   { name: 'John Doe', feedback: '  Amazing service  The electrician arrived on time and fixed my issue quickly   ' },
   { name: 'Jane Smith', feedback: 'Very professional and knowledgeable staff. Highly recommend ' },
   { name: 'Raj Patel', feedback: '  Quick and efficient service. They installed new wiring in my home perfectly. ' },
 ];
 
 const faqItems = [
-  { question: 'How quickly can I book an electrician?', answer: 'You can book an electrician instantly, and we&apos;ll send someone at your preferred time.' },
+  { question: 'How quickly can I book an electrician?', answer: 'You can book an electrician instantly, and we will send someone at your preferred time.' },
   { question: 'Do you offer emergency services?', answer: 'Yes, we have a dedicated emergency hotline for urgent electrical issues.' },
   { question: 'Are your electricians certified?', answer: 'All our electricians are licensed and certified to handle residential and commercial electrical tasks.' },
 ];
@@ -51,7 +48,7 @@ const ElectricalServiceWebsite = () => {
   
   const residentialServices = [
     { icon: <Zap className="w-6 h-6 text-yellow-500" />, title: 'AC Repair & Installation', price: '₹999', description: 'Expert AC services to keep you cool' },
-    { icon: <Home className="w-6 h-6 text-blue-500" />, title: 'Home Wiring & Rewiring', price: '₹1499', description: 'Upgrade your home&apos;s electrical system' },
+    { icon: <Home className="w-6 h-6 text-blue-500" />, title: 'Home Wiring & Rewiring', price: '₹1499', description: 'Upgrade your home electrical system' },
     { icon: <Star className="w-6 h-6 text-green-500" />, title: 'Appliance Repair', price: '₹799', description: 'Fix all your electrical appliances' },
     { icon: <Zap className="w-6 h-6 text-purple-500" />, title: 'Smart Lighting Solutions', price: '₹1299', description: 'Modernize your home lighting' },
     { icon: <Shield className="w-6 h-6 text-red-500" />, title: 'Electrical Safety Audit', price: '₹699', description: 'Ensure your home is electrically safe' },
@@ -226,10 +223,10 @@ const ElectricalServiceWebsite = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            Powering Your World, One Socket at a Time
+            Your Trusted Electricians in Gurgaon: Fast, Reliable, and Affordable-Guaranteed!
           </motion.h2>
           <p className="text-base md:text-xl mb-8">
-            Experience the brilliance of expert electrical services for your home and business
+            Get Expert Electrical Repairs & Installations for Your Home or Business
           </p>
           <motion.div
             className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4"
@@ -262,7 +259,7 @@ const ElectricalServiceWebsite = () => {
       {/* Services Section */}
       <section id="services" className="py-16">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Our P ervices</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Our Premium Services</h2>
           
           {/* Search Input */}
           <div className="flex justify-center mb-8">
